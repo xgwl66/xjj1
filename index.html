@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>看看美女增强免疫力</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            background: linear-gradient(to bottom right, #1a1a1a, #333333);
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+        }
+        video {
+            max-width: 90%;
+            margin: 0 auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+            outline: none;
+        }
+        .button-container {
+            position: fixed;
+            top: 2px;
+            right: 20px;
+            z-index: 10;
+            display: flex;
+            gap: 10px;
+        }
+        .button-container button {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 10px;
+            transition: opacity 0.3s;
+        }
+        .button-container button:hover {
+            opacity: 0.7;
+        }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            top: 50px;
+            right: 0;
+            background-color: rgba(255, 255, 255, 0.3);
+            border-radius: 12px;
+            min-width: 160px;
+            z-index: 100;
+        }
+        .dropdown-content a {
+            color: white;
+            padding: 10px 15px;
+            text-decoration: none;
+            display: block;
+            transition: background-color 0.3s;
+        }
+        .dropdown-content a:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+    </style>
+</head>
+<body>
+    <div style="position: relative;" id="videoContainer">
+        <video id="videoPlayer" controls muted autoplay preload="auto" aria-label="视频播放器">
+            <source src="" type="video/mp4">
+            您的浏览器不支持HTML5视频。
+        </video>
+        <div class="button-container">
+            <div class="dropdown">
+                <button onclick="toggleDropdown()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 20 20">
+                        <path fill="#cccccc" d="M17.854 4.354a.5.5 0 0 0-.708-.708L15.5 5.293l-.646-.647a.5.5 0 0 0-.708.708l1 1a.5.5 0 0 0 .708 0zm0 9.792a.5.5 0 0 1 0 .708l-2 2a.5.5 0 0 1-.708 0l-1-1a.5.5 0 0 1 .708-.708l.646.647l1.646-1.647a.5.5 0 0 1 .708 0M2.5 5a.5.5 0 0 0 0 1h9a.5.5 0 0 0 0-1zm0 5a.5.5 0 0 0 0 1h9a.5.5 0 0 0 0-1zM2 15.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5"/>
+                    </svg>
+                </button>
+                <div class="dropdown-content" id="dropdownContent">
+                    <a href="#" onclick="changeVideo(0)">线路1</a>
+                    <a href="#" onclick="changeVideo(1)">线路2</a>
+                    <a href="#" onclick="changeVideo(2)">女大</a>
+                    <a href="#" onclick="changeVideo(3)">黑丝</a>
+                    <a href="#" onclick="changeVideo(4)">慢摇</a>
+                    <a href="#" onclick="changeVideo(5)">吊带</a>
+                    <a href="#" onclick="changeVideo(6)">清纯</a>
+                    <a href="#" onclick="changeVideo(7)">女高</a>
+                    <a href="#" onclick="changeVideo(8)">甜妹</a>
+                </div>
+            </div>
+            <button id="unmuteButton" onclick="unmuteVideo()">
+                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24">
+                    <g fill="none" stroke="#cccccc" stroke-width="1.5">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 7.5S21 9 21 11.5s-1.5 4-1.5 4"/>
+                        <path d="M2 13.857v-3.714a2 2 0 0 1 2-2h2.9a1 1 0 0 0 .55-.165l6-3.956a1 1 0 0 1 1.55.835v14.286a1 1 0 0 1-1.55.835l-6-3.956a1 1 0 0 0-.55-.165H4a2 2 0 0 1-2-2Z"/>
+                    </g>
+                </svg>
+            </button>
+            <button id="fullscreenButton" onclick="openFullscreen()">
+                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24">
+                    <path fill="none" stroke="#cccccc" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 9L4 4m0 0v4m0-4h4m7 5l5-5m0 0v4m0-4h-4M9 15l-5 5m0 0v-4m0 4h4m7-5l5 5m0 0v-4m0 4h-4"/>
+                </svg>
+            </button>
+        </div>
+    </div>
+    <script>
+        const apiUrls = [
+            'http://api.yujn.cn/api/zzxjj.php?type=video',
+            'https://api.linhun.vip/api/Littlesistervideo?type=video&apiKey=48b0b2ef0f8483326c3c5424911d5924',
+            'https://api.yujn.cn/api/nvda.php?type=video',
+            'http://api.yujn.cn/api/heisis.php?type=video',
+            'http://api.yujn.cn/api/manyao.php?type=video',
+            'http://api.yujn.cn/api/diaodai.php?type=video',
+            'http://api.yujn.cn/api/qingchun.php?type=video',
+            'http://api.yujn.cn/api/nvgao.php?type=video',
+            'http://api.yujn.cn/api/tianmei.php?type=video'
+        ];
+        let currentVideoIndex = 0;
+        let currentApiIndex = 0;
+        let controlTimer;
+        let startX;
+
+        function changeVideo(index) {
+            currentApiIndex = index;
+            currentVideoIndex = 0;
+            loadVideo();
+            toggleDropdown();
+        }
+
+        function loadVideo() {
+            const videoPlayer = document.getElementById('videoPlayer');
+            videoPlayer.removeAttribute('controls');
+            const apiUrl = `${apiUrls[currentApiIndex]}&index=${currentVideoIndex}`;
+            videoPlayer.src = apiUrl;
+            videoPlayer.onloadedmetadata = () => {
+                videoPlayer.play();
+                resetControlTimer();
+            };
+            videoPlayer.onended = refreshVideo;
+            videoPlayer.onerror = handleVideoError;
+        }
+
+        function toggleControls() {
+            const videoPlayer = document.getElementById('videoPlayer');
+            if (videoPlayer.hasAttribute('controls')) {
+                videoPlayer.removeAttribute('controls');
+            } else {
+                videoPlayer.setAttribute('controls', 'controls');
+                resetControlTimer();
+            }
+        }
+
+        function resetControlTimer() {
+            clearTimeout(controlTimer);
+            controlTimer = setTimeout(() => {
+                const videoPlayer = document.getElementById('videoPlayer');
+                videoPlayer.removeAttribute('controls');
+            }, 5000);
+        }
+
+        const videoPlayer = document.getElementById('videoPlayer');
+        videoPlayer.addEventListener('click', toggleControls);
+
+        document.addEventListener('fullscreenchange', () => {
+            if (document.fullscreenElement) {
+                resetControlTimer();
+            } else {
+                videoPlayer.removeAttribute('controls');
+            }
+        });
+
+        function handleVideoError() {
+            console.error('当前视频无法播放，尝试加载下一个视频...');
+            refreshVideo();
+        }
+
+        function refreshVideo() {
+            currentVideoIndex++;
+            loadVideo();
+        }
+
+        window.onload = () => {
+            loadVideo();
+        };
+
+        function openFullscreen() {
+            const videoPlayer = document.getElementById('videoPlayer');
+            if (videoPlayer.requestFullscreen) {
+                videoPlayer.requestFullscreen();
+            }
+        }
+
+        function unmuteVideo() {
+            const videoPlayer = document.getElementById('videoPlayer');
+            videoPlayer.muted = false; 
+            document.getElementById('unmuteButton').style.display = 'none'; 
+        }
+
+        function toggleDropdown() {
+            const dropdownContent = document.getElementById('dropdownContent');
+            dropdownContent.style.display = dropdownContent.style.display === 'block' ? 'none' : 'block';
+        }
+
+        document.addEventListener('click', function(event) {
+            const dropdownContent = document.getElementById('dropdownContent');
+            const dropdownButton = document.querySelector('.dropdown button');
+            if (!dropdownButton.contains(event.target) && !dropdownContent.contains(event.target)) {
+                dropdownContent.style.display = 'none';
+            }
+        });
+
+        videoPlayer.addEventListener('touchstart', function(event) {
+            startX = event.touches[0].clientX;
+        });
+
+        videoPlayer.addEventListener('touchmove', function(event) {
+            const moveX = event.touches[0].clientX;
+            const diffX = startX - moveX;
+
+            if (Math.abs(diffX) > 50) {
+                if (diffX > 0) {
+                    currentVideoIndex++;
+                } else {
+                    currentVideoIndex = Math.max(0, currentVideoIndex - 1);
+                }
+                loadVideo();
+            }
+        });
+    </script>
+</body>
+</html>
